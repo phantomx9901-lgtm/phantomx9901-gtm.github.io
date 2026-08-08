@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PhantomX</title>
+
+<style>
+
+body{
+    margin:0;
+    background:#050505;
+    color:white;
+    font-family:tahoma;
+}
+
+header{
+    text-align:center;
+    padding:30px;
+    background:linear-gradient(135deg,#001a0d,#00ff88);
+    color:#000;
+}
+
+header h1{
+    font-size:50px;
+}
+
+
+.box{
+
+    margin:25px;
+    padding:25px;
+    background:#101010;
+    border:1px solid #00ff88;
+    border-radius:20px;
+    box-shadow:0 0 20px #00ff8844;
+
+}
+
+
+h2{
+    color:#00ff88;
+}
+
+
+button{
+
+    background:#00ff88;
+    color:#000;
+    border:none;
+    padding:12px 25px;
+    border-radius:20px;
+    cursor:pointer;
+
+}
+
+
+input,textarea{
+
+    width:90%;
+    padding:12px;
+    border-radius:10px;
+    border:none;
+    margin:8px;
+
+}
+
+
+.story{
+
+background:#151515;
+padding:15px;
+margin:15px;
+border-radius:15px;
+
+}
+
+
+.lock{
+
+color:#ffcc00;
+
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<h1>PhantomX</h1>
+
+<p>
+هوش مصنوعی و کتابخانه داستان‌های دیجیتال
+</p>
+
+</header>
+
+
+
+<div class="box">
+
+<h2>درباره PhantomX 🟢</h2>
+
+
+<p>
+PhantomX یک محیط هوشمند و خلاق برای داستان،
+یادگیری و ارتباط کاربران است.
+</p>
+
+
+<p>
+هدف PhantomX ساخت تجربه‌ای امن،
+زیبا و ساده برای همه کاربران است.
+</p>
+
+
+</div>
+
+
+
+
+<div class="box">
+
+
+<h2>
+📚 کتابخانه PhantomX
+</h2>
+
+
+<div id="myStories">
+
+
+<p>
+هنوز داستانی منتشر نشده است.
+</p>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="box">
+
+
+<h2>
+🔐 پنل داستان‌های من
+</h2>
+
+
+<p>
+برای ورود پاسخ دهید:
+</p>
+
+
+<p>
+تاریخ تولدت چیست؟
+</p>
+
+
+<input id="birth"
+placeholder="مثال: 7 August 2006">
+
+
+<button onclick="openPanel()">
+
+ورود به پنل
+
+</button>
+
+
+<div id="panel" style="display:none">
+
+
+<h3>
+نوشتن داستان جدید
+</h3>
+
+
+<input id="title"
+placeholder="عنوان داستان">
+
+
+<input id="author"
+placeholder="نام نویسنده">
+
+
+<textarea id="text"
+placeholder="متن داستان">
+</textarea>
+
+
+<button onclick="addStory()">
+
+انتشار داستان
+
+</button>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="box">
+
+
+<h2>
+✍️ کتابخانه کاربران PhantomX
+</h2>
+
+
+<p class="lock">
+
+🔒 این بخش فقط روز جمعه برای شما فعال می‌شود.
+
+</p>
+
+
+<div id="userLibrary">
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<script>
+
+
+let stories =
+JSON.parse(localStorage.getItem("stories")) || [];
+
+
+
+function openPanel(){
+
+
+let answer =
+document.getElementById("birth").value;
+
+
+if(answer=="7 August 2006"){
+
+
+document.getElementById("panel").style.display="block";
+
+
+alert("ورود موفق بود");
+
+
+}
+
+else{
+
+
+alert("تاریخ تولد اشتباه است");
+
+
+}
+
+
+}
+
+
+
+
+function addStory(){
+
+
+let title =
+document.getElementById("title").value;
+
+
+let author =
+document.getElementById("author").value;
+
+
+let text =
+document.getElementById("text").value;
+
+
+
+let story={
+
+title:title,
+
+author:author,
+
+text:text
+
+};
+
+
+
+stories.push(story);
+
+
+localStorage.setItem(
+
+"stories",
+
+JSON.stringify(stories)
+
+);
+
+
+showStories();
+
+
+}
+
+
+
+
+
+function showStories(){
+
+
+let box =
+document.getElementById("myStories");
+
+
+box.innerHTML="";
+
+
+stories.forEach(s=>{
+
+
+box.innerHTML +=
+
+`
+
+<div class="story">
+
+<h3>${s.title}</h3>
+
+<b>${s.author}</b>
+
+<p>${s.text}</p>
+
+
+</div>
+
+`;
+
+
+});
+
+
+}
+
+
+
+showStories();
+
+
+
+</script>
+
+
+</body>
+
+</html><!-- بخش دوم PhantomX -->
+
+
+<div class="box">
+
+<h2>⭐ امتیاز و نظرات داستان‌ها</h2>
+
+
+<input id="commentName"
+placeholder="نام و نام خانوادگی">
+
+
+<textarea id="commentText"
+placeholder="نظر خود را بنویسید">
+</textarea>
+
+
+<button onclick="saveComment()">
+ثبت نظر
+</button>
+
+
+<div id="comments">
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="box">
+
+
+<h2>
+🤖 PhantomX
+</h2>
+
+
+<div id="chat"
+class="story">
+
+<p>
+<b style="color:#00ff88">
+PhantomX:
+</b>
+
+<br>
+
+سلام، من PhantomX هستم.
+چطور می‌توانم کمکتان کنم؟
+
+</p>
+
+
+</div>
+
+
+<input id="message"
+placeholder="پیام خود را بنویسید">
+
+
+<button onclick="chatBot()">
+
+ارسال
+
+</button>
+
+
+<button onclick="readAnswer()">
+
+🔊 خواندن پاسخ
+
+</button>
+
+
+
+</div>
+
+
+
+
+
+<div class="box">
+
+
+<h2>
+📩 ارتباط
+</h2>
+
+
+<p>
+ایمیل:
+<br>
+
+phantomx9901@gmail.com
+
+</p>
+
+
+</div>
+
+
+
+
+
+<script>
+
+
+let comments =
+
+JSON.parse(localStorage.getItem("comments")) || [];
+
+
+
+
+function saveComment(){
+
+
+let name =
+document.getElementById("commentName").value;
+
+
+let text =
+document.getElementById("commentText").value;
+
+
+
+if(name=="" || text==""){
+
+alert("لطفاً همه قسمت‌ها را پر کنید");
+
+return;
+
+}
+
+
+
+let item={
+
+name:name,
+
+text:text,
+
+date:new Date().toLocaleDateString()
+
+};
+
+
+
+comments.push(item);
+
+
+
+localStorage.setItem(
+
+"comments",
+
+JSON.stringify(comments)
+
+);
+
+
+
+showComments();
+
+
+
+}
+
+
+
+
+
+function showComments(){
+
+
+let box =
+document.getElementById("comments");
+
+
+box.innerHTML="";
+
+
+comments.forEach(c=>{
+
+
+box.innerHTML +=
+
+`
+
+<div class="story">
+
+<b>${c.name}</b>
+
+<p>${c.text}</p>
+
+<small>${c.date}</small>
+
+</div>
+
+`;
+
+});
+
+
+}
+
+
+showComments();
+
+
+
+
+
+let lastAnswer="";
+
+
+
+
+function chatBot(){
+
+
+let msg =
+document.getElementById("message").value;
+
+
+if(msg=="") return;
+
+
+
+let answer="";
+
+
+
+let m=msg.toLowerCase();
+
+
+
+
+if(
+m.includes("سلام") ||
+m.includes("hello")
+)
+
+{
+
+answer="سلام دوست عزیز، من PhantomX هستم. خوشحالم که با شما صحبت می‌کنم.";
+
+}
+
+
+
+else if(
+m.includes("نام") ||
+m.includes("اسم")
+)
+
+{
+
+answer="من PhantomX هستم، دستیار هوشمند سایت.";
+
+}
+
+
+
+else if(
+m.includes("داستان")
+)
+
+{
+
+answer="می‌توانید داستان‌های جذاب را در کتابخانه PhantomX بخوانید.";
+
+}
+
+
+
+else if(
+m.includes("help") ||
+m.includes("کمک")
+)
+
+{
+
+answer="من آماده کمک و پاسخ به سوالات شما هستم.";
+
+}
+
+
+
+else
+
+{
+
+answer="پیام شما دریافت شد. تلاش می‌کنم پاسخ مفیدی ارائه کنم.";
+
+}
+
+
+
+
+lastAnswer=answer;
+
+
+
+let chat =
+document.getElementById("chat");
+
+
+
+chat.innerHTML +=
+
+`
+
+<p>
+
+<b>شما:</b>
+
+<br>
+
+${msg}
+
+</p>
+
+
+<p style="color:#00ff88">
+
+<b>PhantomX:</b>
+
+<br>
+
+${answer}
+
+</p>
+
+`;
+
+
+
+localStorage.setItem(
+
+"PhantomX_chat",
+
+chat.innerHTML
+
+);
+
+
+
+document.getElementById("message").value="";
+
+
+}
+
+
+
+
+
+
+
+function readAnswer(){
+
+
+let voice =
+new SpeechSynthesisUtterance(lastAnswer);
+
+
+
+voice.lang="fa-IR";
+
+
+speechSynthesis.speak(voice);
+
+
+
+}
+
+
+
+
+</script>
